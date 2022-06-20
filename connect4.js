@@ -68,8 +68,9 @@ makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 findSpotForCol(x) {
+  console.log('Inside findspotcol hello');
   for (let y = this.HEIGHT - 1; y >= 0; y--) {
-    if (!this.board[y][x]) {
+    if (this.board[y][x]) {
       return y;
     }
   }
@@ -101,7 +102,13 @@ handleClick(evt) {
   const x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  const y = findSpotForCol(x);
+  
+  
+   
+  
+   ;
+
+  const y = this.findSpotForCol(x);
   if (y === null) {
     return;
   }
@@ -162,6 +169,6 @@ checkForWin() {
 
 }
 
-new Game(6,7);
+let game = new Game(6,7);
 
 
