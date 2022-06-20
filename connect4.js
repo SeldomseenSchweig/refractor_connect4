@@ -3,7 +3,7 @@
 class Game{
   constructor(WIDTH, HEIGHT){
     this.WIDTH = WIDTH;
-    this.HEIGHT = WIDTH;
+    this.HEIGHT = HEIGHT;
     this.board = [];
     this.currPlayer = 1;
     this.makeBoard()
@@ -69,10 +69,10 @@ makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 findSpotForCol(x) {
-  console.log('Inside findspotcol hello');
+  
   for (let y = this.HEIGHT - 1; y >= 0; y--) {
-    if (this.board[y][x]) {
-      console.log(y)
+    
+    if (!this.board[y][x]) {
       return y;
     }
   }
@@ -84,7 +84,7 @@ findSpotForCol(x) {
 placeInTable(y, x) {
   const piece = document.createElement('div');
   piece.classList.add('piece');
-  piece.classList.add(`p${currPlayer}`);
+  piece.classList.add(`p${this.currPlayer}`);
   piece.style.top = -50 * (y + 2);
 
   const spot = document.getElementById(`${y}-${x}`);
@@ -105,10 +105,7 @@ handleClick(evt) {
 
   // get next spot in column (if none, ignore click)
   
-  
-   
-  
-   ;
+
 
   const y = this.findSpotForCol(x);
   if (y === null) {
@@ -116,27 +113,31 @@ handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  this.board[y][x] = currPlayer;
-  placeInTable(y, x);
+  this.board[y][x] = this.currPlayer;
+  this.placeInTable(y, x);
   
   // check for win
-  if (checkForWin()) {
-    return this.endGame(`Player ${currPlayer} won!`);
+  if (this.checkForWin()) {
+    return this.endGame(`Player ${this.currPlayer} won!`);
   }
   
   // check for tie
-  if (board.every(row => row.every(cell => cell))) {
+  if (this.board.every(row => row.every(cell => cell))) {
     return this.endGame('Tie!');
   }
     
   // switch players
-  currPlayer = currPlayer === 1 ? 2 : 1;
+  this.currPlayer = this.currPlayer === 1 ? 2 : 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 checkForWin() {
-  function _win(cells) {
+  
+  
+  const _win = cells => {
+
+
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
@@ -147,9 +148,10 @@ checkForWin() {
         y < this.HEIGHT &&
         x >= 0 &&
         x < this.WIDTH &&
-        this.board[y][x] === currPlayer
+        this.board[y][x] === this.currPlayer
     );
   }
+
 
   for (let y = 0; y < this.HEIGHT; y++) {
     for (let x = 0; x < this.WIDTH; x++) {
@@ -161,7 +163,7 @@ checkForWin() {
       const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
       // find winner (only checking each win-possibility as needed)
-      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+      if (_win(horiz) ||_win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
       }
     }
@@ -170,7 +172,6 @@ checkForWin() {
 
 
 }
-
-let game = new Game(6,7);
+new Game(6,7);
 
 
