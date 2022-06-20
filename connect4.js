@@ -1,7 +1,7 @@
 
 
 class Game{
-  constructor(WIDTH, HEIGHT, board){
+  constructor(WIDTH, HEIGHT){
     this.WIDTH = WIDTH;
     this.HEIGHT = WIDTH;
     this.board = [];
@@ -156,8 +156,8 @@ checkForWin() {
     }
   }
 }
-  makeBoard();
-  makeHtmlBoard();
+   makeBoard();
+   makeHtmlBoard();
 
 }
 
