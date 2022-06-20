@@ -6,9 +6,9 @@ class Game{
     this.HEIGHT = WIDTH;
     this.board = [];
     this.currPlayer = 1;
-    this.makeBoard = this.makeBoard.bind(this);
-    this.makeHtmlBoard = this.makeHtmlBoard.bind(this);
-    
+    this.makeBoard()
+    this.makeHtmlBoard(); 
+
 
   }
   /** Connect Four
