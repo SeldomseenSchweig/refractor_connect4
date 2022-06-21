@@ -42,6 +42,7 @@ this.makeHtmlBoard();
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 makeHtmlBoard() {
+  board.innerHTML = "";
   const board = document.getElementById('board');
 
   // make column tops (clickable area for adding a piece to that column)
