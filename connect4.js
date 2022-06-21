@@ -85,13 +85,6 @@ findSpotForCol(x) {
   return null;
 }
 
- //Removing by class name
- removePieces(){
-   const elements = document.getElementsByClassName('piece');
-   while(elements.length > 0){
-       elements[0].parentNode.removeChild(elements[0]);
-   }
-}
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 placeInTable(y, x) {
