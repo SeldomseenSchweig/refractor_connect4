@@ -6,10 +6,8 @@ class Game{
     this.HEIGHT = HEIGHT;
     this.board = [];
     this.currPlayer = 1;
-    this.makeBoard()
-    this.makeHtmlBoard(); 
-
-
+    this.makeBoard();
+    this.makeHtmlBoard();
   }
   /** Connect Four
  *
@@ -27,6 +25,13 @@ class Game{
 /** makeBoard: create in-JS board structure:
  *   board = array of rows, each row is array of cells  (board[y][x])
  */
+
+reset(){
+this.makeBoard();
+this.board =[];
+this.makeHtmlBoard();
+
+}
 
  makeBoard() {
   for (let y = 0; y < this.HEIGHT; y++) {
@@ -76,9 +81,17 @@ findSpotForCol(x) {
       return y;
     }
   }
+  
   return null;
 }
 
+ //Removing by class name
+ removePieces(){
+   const elements = document.getElementsByClassName('piece');
+   while(elements.length > 0){
+       elements[0].parentNode.removeChild(elements[0]);
+   }
+}
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 placeInTable(y, x) {
@@ -172,6 +185,21 @@ checkForWin() {
 
 
 }
-new Game(6,7);
+
+
+const gameStart = document.getElementById('start');
+const reset = document.getElementById('reset');
+
+
+
+gameStart.addEventListener("click",function (event){
+new Game(6,7)
+  
+})
+
+  
+
+
+  
 
 
