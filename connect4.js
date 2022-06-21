@@ -26,12 +26,7 @@ class Game{
  *   board = array of rows, each row is array of cells  (board[y][x])
  */
 
-reset(){
-this.makeBoard();
-this.board =[];
-this.makeHtmlBoard();
 
-}
 
  makeBoard() {
   for (let y = 0; y < this.HEIGHT; y++) {
@@ -42,8 +37,9 @@ this.makeHtmlBoard();
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 makeHtmlBoard() {
-  board.innerHTML = "";
+  
   const board = document.getElementById('board');
+  board.innerHTML = "";
 
   // make column tops (clickable area for adding a piece to that column)
   const top = document.createElement('tr');
@@ -187,6 +183,7 @@ const gameStart = document.getElementById('start');
 
 
 gameStart.addEventListener("click",function (event){
+ // board.innerHTML = "";
 new Game(6,7)
   
 })
