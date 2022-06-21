@@ -188,7 +188,7 @@ checkForWin() {
 
 
 const gameStart = document.getElementById('start');
-const reset = document.getElementById('reset');
+
 
 
 
