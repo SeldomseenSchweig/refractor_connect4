@@ -1,15 +1,19 @@
 
 
 class Game{
-  constructor(WIDTH, HEIGHT){
+  constructor(p1,p2, WIDTH = 6 , HEIGHT = 7){
+    this.players = [p1,p2];
     this.WIDTH = WIDTH;
     this.HEIGHT = HEIGHT;
     this.board = [];
-    this.currPlayer = 1;
+    this.currPlayer = p1;
     this.makeBoard();
     this.makeHtmlBoard();
     this.over = false;
   }
+
+
+
   /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
@@ -46,7 +50,9 @@ makeHtmlBoard() {
   // make column tops (clickable area for adding a piece to that column)
   const top = document.createElement('tr');
   top.setAttribute('id', 'column-top');
-  top.addEventListener('click', this.handleClick.bind(this));
+  this.handleGameClick = this.handleClick.bind(this);
+
+  top.addEventListener('click', this.handleGameClick);
   for (let x = 0; x < this.WIDTH; x++) {
     const headCell = document.createElement('td');
     headCell.setAttribute('id', x);
@@ -88,7 +94,7 @@ findSpotForCol(x) {
 placeInTable(y, x) {
   const piece = document.createElement('div');
   piece.classList.add('piece');
-  piece.classList.add(`p${this.currPlayer}`);
+  piece.style.backgroundColor = this.currPlayer.color;
   piece.style.top = -50 * (y + 2);
 
   const spot = document.getElementById(`${y}-${x}`);
@@ -98,9 +104,9 @@ placeInTable(y, x) {
 /** endGame: announce game end */
 
 endGame(msg) {
+  alert(msg);
   const top = document.querySelector("#column-top");
   top.removeEventListener("click", this.handleGameClick);
-  alert(msg);
 }
 
 
@@ -129,7 +135,7 @@ handleClick(evt) {
   if (this.checkForWin()) {
     this.over = true;
 
-    return this.endGame(`Player ${this.currPlayer} won!`);
+    return this.endGame(`Player ${this.currPlayer.color} won!`);
   }
   
   // check for tie
@@ -139,7 +145,8 @@ handleClick(evt) {
   }
     
   // switch players
-  this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+  this.currPlayer =
+  this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -182,16 +189,23 @@ checkForWin() {
   }
 }
 
+}
 
+
+class Player{
+  constructor(color){
+    this.color = color;
+  }
+  
 }
 
 
 const gameStart = document.getElementById('start');
 
-
 gameStart.addEventListener("click",function (event){
- // board.innerHTML = "";
-new Game(7,6)
+  let p1 = new Player(document.getElementById('player1').value);
+  let p2 = new Player(document.getElementById('player2').value);
+new Game(p1,p2);
   
 })
 
