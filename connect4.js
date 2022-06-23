@@ -98,8 +98,12 @@ placeInTable(y, x) {
 /** endGame: announce game end */
 
 endGame(msg) {
+  const top = document.querySelector("#column-top");
+  top.removeEventListener("click", this.handleGameClick);
   alert(msg);
 }
+
+
 
 /** handleClick: handle click of column top to play piece */
 
@@ -123,12 +127,14 @@ handleClick(evt) {
   
   // check for win
   if (this.checkForWin()) {
-  
+    this.over = true;
+
     return this.endGame(`Player ${this.currPlayer} won!`);
   }
   
   // check for tie
   if (this.board.every(row => row.every(cell => cell))) {
+    
     return this.endGame('Tie!');
   }
     
