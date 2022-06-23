@@ -8,6 +8,7 @@ class Game{
     this.currPlayer = 1;
     this.makeBoard();
     this.makeHtmlBoard();
+    this.over = false;
   }
   /** Connect Four
  *
@@ -34,6 +35,7 @@ class Game{
   }
 }
 
+
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 makeHtmlBoard() {
@@ -45,7 +47,6 @@ makeHtmlBoard() {
   const top = document.createElement('tr');
   top.setAttribute('id', 'column-top');
   top.addEventListener('click', this.handleClick.bind(this));
-
   for (let x = 0; x < this.WIDTH; x++) {
     const headCell = document.createElement('td');
     headCell.setAttribute('id', x);
@@ -102,6 +103,7 @@ endGame(msg) {
 
 /** handleClick: handle click of column top to play piece */
 
+
 handleClick(evt) {
   // get x from ID of clicked cell
   const x = +evt.target.id;
@@ -121,6 +123,7 @@ handleClick(evt) {
   
   // check for win
   if (this.checkForWin()) {
+  
     return this.endGame(`Player ${this.currPlayer} won!`);
   }
   
@@ -180,11 +183,9 @@ checkForWin() {
 const gameStart = document.getElementById('start');
 
 
-
-
 gameStart.addEventListener("click",function (event){
  // board.innerHTML = "";
-new Game(6,7)
+new Game(7,6)
   
 })
 
